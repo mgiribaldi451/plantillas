@@ -1,0 +1,32 @@
+html 
+
+    head
+
+        title Productos Backend
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" /> 
+
+
+    body
+
+        h1 Productos        
+            if productos.length>0
+                table
+                    tr
+                        td Nombre
+                        td Precio
+                        td Imagen
+
+                each producto in productos
+                    <tr>
+                        td=producto.Nombre
+                        td=producto.Precio
+                        td=producto.Url
+                    </tr>
+
+            else
+                <h3 class="alert alert-danger">no se encontraron datos</h1>
+        
+        br
+        a(href="/pug") 
+            <button> ir a form
+        

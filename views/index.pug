@@ -1,0 +1,30 @@
+
+html 
+
+    head
+
+        title Productos Backend
+         <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+
+    body
+            h2 Ingrese Producto
+            <form (role='form' action="productospug" method="POST")>
+                div.form-group
+                    label(for='name') Name:
+                    input#name.form-control(type='text', placeholder='name' name='name')
+                div.form-group
+                    label(for='url') Url:
+                    input#name.form-control(type='text', placeholder='url' name='url')
+                div.form-group
+                    label(for='precio') Precio:
+                    input#name.form-control(type='text', placeholder='precio' name='precio')
+                button(type="submit") Enviar
+
+            br
+            </form>
+            a(href="/productospug") 
+                <button> ir a productos
+                
+
+    

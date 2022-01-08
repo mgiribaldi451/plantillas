@@ -1,9 +1,24 @@
 <h1>Productos</h1>
 
 {{#if listExists}}
-<ul>
+<table>
+    <tr>
+        <td>Nombre</td>
+        <td>Precio</td>
+        <td>Imagen</td>
+    </tr>
     {{#each productos}}
-        <li class={{this.id}}>{{this.Nombre}}</li>
+    <tr>
+        <td class={{this.id}}>{{this.Nombre}}</td>
+        <td class={{this.id}}>{{this.Precio}}</td>
+        <td class={{this.id}}><img src={{this.Url}}></td>
+    </tr>
+        
     {{/each}}
-</ul>
+</table>
 {{/if}}
+<br>
+        <a href="/">
+        <button>ir a form</button>
+        
+        </a>

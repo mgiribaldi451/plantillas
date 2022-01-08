@@ -1,4 +1,3 @@
-//import handlebars from 'express-handlebars'
 const express = require('express');
 const app = express();
 const handlebars = require('express-handlebars');
@@ -6,20 +5,19 @@ const bp = require('body-parser')
 app.use(bp.json())
 app.use(bp.urlencoded({ extended: true }))
 
+/* --------------------------HBS---------------------------- */
 app.set('views', './views');
 app.set('view engine', 'hbs');
-
-
 //establecemos la configuración de handlebars
 app.engine(
-    'hbs',handlebars.engine({
+    'hbs', handlebars.engine({
         extname: ".hbs",
         defaultLayout: 'index.hbs'
-      })
+    })
 );
 
 
-let productos=[
+let productos = [
 
     {
         "id": 1,
@@ -41,9 +39,9 @@ let productos=[
         "Precio": 2500
     }
 ]
-
+/* --------------------------HBS---------------------------- */
 app.get("/productos", (req, res) => {
-    res.render("datos", {productos:productos,listExists:true});
+    res.render("datos", { productos: productos, listExists: true });
 });
 
 
@@ -53,15 +51,62 @@ app.get('/', (req, res) => {
 })
 
 app.post('/productos', (req, res) => {
+
+    const valor = Math.max(...productos.map(o => o.id), 0);
+    console.log(req.body);
+    req.body.id = valor + 1
+    productos = [...productos, req.body]
+    res.render("datos", { productos: productos, listExists: true });
+})
+
+/* ----------------------EJS-------------------------------- */
+
+/*app.set('view engine', 'ejs');
+app.get('/ejs', (req, res) => {
+    res.render("pages/indexEjs")
+})
+
+app.post('/productosejs', (req, res) => {
     
     const valor = Math.max(...productos.map(o => o.id), 0);
     console.log(req.body);
     req.body.id = valor + 1
     productos = [...productos, req.body]
-    res.render("datos", {productos:productos,listExists:true});
+    console.log(productos);
+    res.redirect('/productosejs');
 })
 
-/* ------------------------------------------------------ */
+app.get('/productosejs',(req,res)=>{
+    console.log(productos);
+    res.render("pages/datosEjs", {productos});
+
+})*/
+
+/* ----------------------PUG-------------------------------- */
+
+/*app.set('view engine', 'pug');
+app.get('/pug', (req, res) => {
+    res.render('index.pug')
+})
+
+app.post('/productospug', (req, res) => {
+    
+    const valor = Math.max(...productos.map(o => o.id), 0);
+    console.log(req.body);
+    req.body.id = valor + 1
+    productos = [...productos, req.body]
+    console.log(productos);
+    //res.redirect('/productospug');
+})
+
+app.get('/productospug',(req,res)=>{
+    console.log(productos);
+    res.render("datosPug.pug", {productos});
+
+})*/
+
+
+
 /* Server Listen */
 const PORT = 8080
 const server = app.listen(PORT, () => {
